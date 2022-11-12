@@ -44,16 +44,17 @@ def display_criptos(divisa):
         style=style,
         description='Elija la criptomoneda a mostrar:',
     )
-    return pair
+    display(pair)
+    return pair, pair_list
 
 button = widgets.Button(description="Click Me!")
 output = widgets.Output()
 
 def on_button_clicked(b):
     with output:
-        clear_output(wait=True)
-        display(display_criptos(divisa.value))
-
+        # clear_output(wait=True)
+        # display(display_criptos(divisa.value))
+        divisa.value
 date=widgets.DatePicker(
     description='Pick a Date',
     disabled=False,
