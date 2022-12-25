@@ -5,5 +5,4 @@ import pandas as pd
 import datetime as dt
 from IPython.display import display, clear_output
 import plotly.graph_objects as go
-import plotly.express as plotly
 import streamlit as st

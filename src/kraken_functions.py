@@ -13,8 +13,8 @@ def get_cripto_pairs(tipo):
         lista.append((j,i))
     return lista
 
-def recoger_datos(moneda):
+def recoger_datos(moneda, intervalo):
     api = krakenex.API()
     k = KrakenAPI(api)
-    ohlc, last = k.get_ohlc_data(moneda)
+    ohlc, last = k.get_ohlc_data(moneda, interval=intervalo)
     return ohlc, last
