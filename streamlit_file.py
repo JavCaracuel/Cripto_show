@@ -8,7 +8,7 @@ intervals=[1, 5, 15,30,60,240,1440,10080,21600]
 selected_interval=st.selectbox('Elije un intervalo en segundos:',intervals)
 st.write(f'Has seleccionado el intervalo: {selected_divisa}')
 if selected_divisa:
-    pair_list=get_cripto_pairs(selected_divisa)
+    pair_list=kraken_functions.get_cripto_pairs(selected_divisa)
     pair_list = [t[0] for t in pair_list]
 selected_cripto=st.selectbox('Elije una divisa:',pair_list)
 st.write(f'Has seleccionado la criptomoneda: {selected_cripto}')
