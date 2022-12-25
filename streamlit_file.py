@@ -1,6 +1,5 @@
 from src import kraken_functions
 from src.libraries import *
-from src.display_UI import *
 st.title("Cripto Show")
 divisas=['EUR', 'USD']
 selected_divisa=st.selectbox('Elije una divisa:',divisas)
