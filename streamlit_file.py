@@ -1,5 +1,7 @@
-from src import kraken_functions
-from src.libraries import *
+import sys
+sys.path.append('./src/')
+import kraken_functions
+from libraries import *
 
 #### SELECCIÓN DE VARIABLES DE CONTORNO ####
 # Título de la aplicación: 
@@ -29,7 +31,7 @@ ventana = st.slider("Selecciona la ventana de la media móvil", 1, 100, 20)
 
 #### REPRESENTACIONES GRÁFICA ####
 # Recogida de datos con Krakenex:
-data,_=kraken_functions.recoger_datos(selected_cripto, selected_interval)
+data=kraken_functions.recoger_datos(selected_cripto, selected_interval)
 
 # Cambiar el tiempo de timestamp a datetime (meter en src)
 data['time_dt'] = pd.to_datetime(data['time'], unit='s')

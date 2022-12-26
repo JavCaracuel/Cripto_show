@@ -1,5 +1,7 @@
-from .libraries import krakenex
-from .libraries import KrakenAPI
+import sys
+sys.path.append('./libraries')
+from libraries import krakenex
+from libraries import KrakenAPI
 
 def get_cripto_pairs(tipo):
     api = krakenex.API()
@@ -16,5 +18,11 @@ def get_cripto_pairs(tipo):
 def recoger_datos(moneda, intervalo):
     api = krakenex.API()
     k = KrakenAPI(api)
-    ohlc, last = k.get_ohlc_data(moneda, interval=intervalo)
-    return ohlc, last
+    ohlc,_ = k.get_ohlc_data(moneda, interval=intervalo)
+    return ohlc
+
+def calcular_media_movil_simple():
+    pass
+
+def calcular_media_movil_exponencial():
+    pass
