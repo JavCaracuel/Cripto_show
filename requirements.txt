@@ -1,0 +1,7 @@
+krakenex
+pykrakenapi
+pandas
+datetime
+plotly
+streamlit
+pytest
