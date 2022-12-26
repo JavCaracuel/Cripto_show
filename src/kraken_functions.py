@@ -1,5 +1,5 @@
 import sys
-sys.path.append('./libraries')
+sys.path.append('libraries')
 from libraries import krakenex
 from libraries import KrakenAPI
 
