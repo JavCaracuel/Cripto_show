@@ -17,10 +17,19 @@ def test_recoger_datos():
 
 def test_calcular_media_movil_simple():
     df = pd.DataFrame()
-    data = calcular_media_movil_simple('ADAEUR', 10)
+    # Recogida de datos con Krakenex:
+    data=kraken_functions.recoger_datos('ADAEUR', 5)
+
+    # Cambiar el tiempo de timestamp a datetime (meter en src)
+    data['time_dt'] = pd.to_datetime(data['time'], unit='s')
+    data = calcular_media_movil_simple(data, 10)
     assert type(data)==type(df)
 
 def test_calcular_media_movil_exponencial():
     df = pd.DataFrame()
-    data = calcular_media_movil_exponencial('ADAEUR', 10)
+    data=kraken_functions.recoger_datos('ADAEUR', 5)
+
+    # Cambiar el tiempo de timestamp a datetime (meter en src)
+    data['time_dt'] = pd.to_datetime(data['time'], unit='s')
+    data = calcular_media_movil_exponencial(data, 10)
     assert type(data)==type(df)
