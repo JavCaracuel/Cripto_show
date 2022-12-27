@@ -21,8 +21,14 @@ def recoger_datos(moneda, intervalo):
     ohlc,_ = k.get_ohlc_data(moneda, interval=intervalo)
     return ohlc
 
-def calcular_media_movil_simple():
-    pass
+def calcular_media_movil_simple(data_close, ventana):
+    data_close = data_close.sort_index(ascending=True)
+    data_close[f'ma_{ventana}'] = data_close['close'].rolling(ventana, min_periods=1).mean()
+    data_close = data_close.sort_index(ascending=False)
+    return data_close
 
-def calcular_media_movil_exponencial():
-    pass
+def calcular_media_movil_exponencial(data_close, ventana):
+    data_close = data_close.sort_index(ascending=True)
+    data_close[f'me_{ventana}'] = data_close['close'].ewm(span=ventana).mean()
+    data_close = data_close.sort_index(ascending=False)
+    return data_close
