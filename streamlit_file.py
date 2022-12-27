@@ -48,7 +48,7 @@ fig.add_trace(go.Candlestick(
             ))
 
 # Generación del gráfico de media móvil simple: 
-data[f'ma_{ventana}'] = data['close'].rolling(ventana).mean()
+data = kraken_functions.calcular_media_movil_simple(data, ventana)
 fig.add_trace(go.Scatter(x=data["time_dt"], 
                          y=data[f'ma_{ventana}'],
                          mode='lines', 
@@ -57,7 +57,7 @@ fig.add_trace(go.Scatter(x=data["time_dt"],
                         ))
 
 # Generación del gráfico de media móvil exponencial:
-data[f'me_{ventana}'] = data['close'].ewm(span=ventana).mean()
+data = kraken_functions.calcular_media_movil_exponencial(data, ventana)
 fig.add_trace(go.Scatter(x=data["time_dt"], 
                          y=data[f'me_{ventana}'],
                          mode='lines', 
@@ -67,5 +67,4 @@ fig.add_trace(go.Scatter(x=data["time_dt"],
 
 # Representacion gráfica en la aplicación:
 st.plotly_chart(fig)
-
 print(data)
