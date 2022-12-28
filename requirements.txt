@@ -1,6 +1,7 @@
 krakenex
 pykrakenapi
 pandas
+numpy
 datetime
 plotly
 streamlit
