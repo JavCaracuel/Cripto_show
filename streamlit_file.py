@@ -37,15 +37,18 @@ data=kraken_functions.recoger_datos(selected_cripto, selected_interval)
 data['time_dt'] = pd.to_datetime(data['time'], unit='s')
 
 # Creación del gráfico de velas japonesas
-fig = go.Figure()
+from plotly.subplots import make_subplots
+fig = make_subplots(specs=[[{"secondary_y": True}]])
+#  fig = go.Figure()
 fig.add_trace(go.Candlestick(
               x=data["time_dt"], 
               open=data["open"],
               high=data["high"],
               low=data["low"],
               close=data["close"],
-              name="Candlestick"
-            ))
+              name="Candlestick"),
+            secondary_y=False,
+            )
 
 # Generación del gráfico de media móvil simple: 
 data = kraken_functions.calcular_media_movil_simple(data, ventana)
@@ -53,8 +56,9 @@ fig.add_trace(go.Scatter(x=data["time_dt"],
                          y=data[f'ma_{ventana}'],
                          mode='lines', 
                          name=f'Media Simple - {ventana}',
-                         line = dict(color='cyan', width=1)
-                        ))
+                         line = dict(color='cyan', width=1)),
+                        secondary_y=False,
+                        )
 
 # Generación del gráfico de media móvil exponencial:
 data = kraken_functions.calcular_media_movil_exponencial(data, ventana)
@@ -62,9 +66,23 @@ fig.add_trace(go.Scatter(x=data["time_dt"],
                          y=data[f'me_{ventana}'],
                          mode='lines', 
                          name=f'Media Exponencial - {ventana}',
-                         line = dict(color='royalblue', width=1)
-                        ))
+                         line = dict(color='royalblue', width=1)),
+                        secondary_y=False,
+                        )
+
+# Cálculo del RSI:
+rsi_values = kraken_functions.calcular_rsi(data.copy(), ventana)
+data[f"rsi_{ventana}"] = rsi_values
+print(data)
+fig.add_trace(go.Scatter(x=data["time_dt"], 
+                         y=data[f'rsi_{ventana}'],
+                         mode='lines', 
+                         name=f'RSI - {ventana}',
+                         line = dict(color='orange', width=1)),
+                        secondary_y=True,
+                        )
+
+fig.update_layout(yaxis2=dict(side="right"))
 
 # Representacion gráfica en la aplicación:
 st.plotly_chart(fig)
-print(data)
